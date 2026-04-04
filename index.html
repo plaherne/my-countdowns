@@ -1,280 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Countdown Timers</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      text-align: center;
-      background-color: #f0f2f5;
-      color: #333;
-      margin: 0;
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
-    }
-
-    /* Base Container Style */
-    .container {
-      margin: 20px auto;
-      padding: 25px;
-      border-radius: 16px;
-      width: 90%;
-      max-width: 450px;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-      position: relative;
-      overflow: hidden;
-      transition: transform 0.3s ease;
-    }
-
-    .container:hover {
-      transform: translateY(-5px);
-    }
-
-    /* Autumn / Bers Theme */
-    .bers-container {
-      background: linear-gradient(135deg, #d35400, #e67e22, #f39c12);
-      color: #fff;
-    }
-
-    /* SVG Autumn Leaf Overlay Pattern */
-    .bers-container::before {
-      content: "";
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      opacity: 0.15;
-      background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 5c0 5-5 5-5 10s5 5 5 10 5-5 5-10-5-5-5-10z' fill='%23ffffff' fill-rule='evenodd'/%3E%3C/svg%3E");
-      pointer-events: none;
-    }
-
-    /* Elf Theme */
-    .christmas-container {
-      background: #1b4d3e; /* Buddy's Suit Green */
-      color: #fff;
-      border: 8px solid #f1c40f; /* Yellow accent like his collar/hat */
-    }
-
-    /* Snowy Overlay for Elf Theme */
-    .christmas-container::before {
-      content: "";
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      opacity: 0.2;
-      background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='10' cy='10' r='2' fill='white'/%3E%3Ccircle cx='50' cy='30' r='3' fill='white'/%3E%3Ccircle cx='80' cy='70' r='2' fill='white'/%3E%3Ccircle cx='30' cy='80' r='4' fill='white'/%3E%3C/svg%3E");
-      pointer-events: none;
-    }
-
-    .header {
-      font-size: 1.6em;
-      margin-bottom: 15px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-      position: relative;
-    }
-
-    .countdown {
-      font-size: 1.4em;
-      font-weight: bold;
-      margin-top: 20px;
-      white-space: pre-line;
-      line-height: 1.4;
-      position: relative;
-    }
-
-    .progress-bar-container {
-      background-color: rgba(255, 255, 255, 0.2);
-      border-radius: 20px;
-      height: 35px;
-      width: 100%;
-      position: relative;
-      margin-top: 10px;
-      overflow: hidden;
-      border: 2px solid rgba(255,255,255,0.3);
-    }
-
-    .progress-bar {
-      height: 100%;
-      border-radius: 20px;
-      width: 0%;
-      transition: width 1s ease-in-out;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #FFFFFF;
-      font-weight: 900;
-      font-size: 1em;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
-    }
-
-    /* Specific Progress Colors */
-    .bers-progress {
-      background: linear-gradient(90deg, #5d4037, #8d6e63);
-    }
-    .christmas-progress {
-      background: linear-gradient(90deg, #c0392b, #e74c3c); /* Red like a candy cane */
-    }
-
-    .labels-row {
-      display: flex;
-      justify-content: space-between;
-      padding: 0 5px;
-      margin-bottom: 5px;
-      position: relative;
-    }
-
-    .label {
-      font-size: 0.85em;
-      font-weight: 700;
-      color: rgba(255,255,255,0.9);
-    }
-
-    .datetime {
-      margin-bottom: 20px;
-      font-size: 1.2em;
-      font-weight: 600;
-      color: #2c3e50;
-      background-color: #fff;
-      padding: 12px 25px;
-      border-radius: 50px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Paul & Roberta's Countdowns</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: #f0f2f5;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .widget-card {
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease;
+        }
+        .widget-card:active {
+            transform: scale(0.98);
+        }
+        /* Custom progress bar styles */
+        .progress-container {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 999px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        /* Pattern overlays */
+        .pattern-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+    </style>
 </head>
-<body>
+<body class="flex flex-col items-center min-h-screen p-4 pb-12">
 
-<!-- Date and Time Display -->
-<div class="datetime" id="dateTimeDisplay">Loading...</div>
+    <!-- Header Clock -->
+    <div class="w-full max-w-sm mb-6 text-center">
+        <div id="live-clock" class="inline-block px-6 py-2 bg-white rounded-full text-[#2c3e50] font-bold shadow-sm border border-gray-100 text-sm">
+            Loading...
+        </div>
+    </div>
 
-<!-- Countdown to the Bers Widget -->
-<div class="container bers-container">
-  <div class="header">Countdown to The Bers</div>
-  <div class="labels-row">
-    <span class="label">Sep 1st</span>
-    <span class="label">Aug 31st</span>
-  </div>
-  <div class="progress-bar-container">
-    <div class="progress-bar bers-progress" id="bersProgress">0%</div>
-  </div>
-  <div class="countdown" id="bersCountdown">Loading...</div>
-</div>
+    <!-- MAIN CONTAINER - Ensures centering on mobile -->
+    <div class="flex flex-col items-center w-full max-w-sm space-y-6">
 
-<!-- Christmas Countdown Widget -->
-<div class="container christmas-container">
-  <div class="header">Christmas Countdown</div>
-  <div class="labels-row">
-    <span class="label">Dec 26th</span>
-    <span class="label">Dec 25th</span>
-  </div>
-  <div class="progress-bar-container">
-    <div class="progress-bar christmas-progress" id="christmasProgress">0%</div>
-  </div>
-  <div class="countdown" id="christmasCountdown">Loading...</div>
-</div>
+        <!-- THE BERS WIDGET -->
+        <div class="relative w-full overflow-hidden text-white widget-card rounded-3xl bg-gradient-to-br from-[#e67e22] to-[#d35400] p-6 text-center border-4 border-[#f39c12]">
+            <div class="pattern-overlay" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 20px 20px;"></div>
+            
+            <!-- Optimized Title: Responsive font size -->
+            <h2 class="mb-4 text-xl font-bold tracking-tight uppercase sm:text-2xl whitespace-nowrap">
+                Countdown to the Bers
+            </h2>
 
-<script>
-  function updateDateTime() {
-    const now = new Date();
-    const options = { 
-      weekday: 'short', 
-      year: 'numeric', 
-      month: 'short', 
-      day: 'numeric', 
-      hour: '2-digit', 
-      minute: '2-digit', 
-      second: '2-digit' 
-    };
-    document.getElementById('dateTimeDisplay').innerText = now.toLocaleDateString('en-GB', options);
-  }
+            <div class="flex justify-between mb-1 text-xs font-semibold opacity-90">
+                <span>Sep 1st</span>
+                <span>Aug 31st</span>
+            </div>
 
-  updateDateTime();
-  setInterval(updateDateTime, 1000);
+            <div class="h-10 mb-4 progress-container">
+                <div id="bers-progress" class="h-full transition-all duration-1000 bg-black bg-opacity-40 flex items-center justify-center text-sm font-bold" style="width: 0%">
+                    0%
+                </div>
+            </div>
 
-  function updateBersCountdown() {
-    const now = new Date();
-    let currentYear = now.getFullYear();
-    
-    // The "Bers" cycle is Sep 1st to Aug 31st.
-    // If today is after Aug 31st (Sep 1st or later), the target is next year's Aug 31st.
-    let startYear = currentYear;
-    if (now >= new Date(currentYear, 8, 1)) {
-        // We are currently IN "The Bers" or past the start
-    } else {
-        startYear = currentYear - 1;
-    }
+            <div class="space-y-1">
+                <p class="text-lg font-medium opacity-90">Days to The Bers</p>
+                <p id="bers-days" class="text-4xl font-bold">---</p>
+            </div>
+        </div>
 
-    const startOfCountdown = new Date(startYear, 8, 1); // Sep 1st last year (or this year)
-    const targetDate = new Date(startYear + 1, 8, 1);   // Sep 1st next occurrence
+        <!-- CHRISTMAS WIDGET -->
+        <div class="relative w-full overflow-hidden text-white widget-card rounded-3xl bg-gradient-to-br from-[#1b4332] to-[#081c15] p-6 text-center border-4 border-[#ffb703]">
+            <div class="pattern-overlay" style="background-image: radial-gradient(circle at 2px 2px, rgba(255,255,255,0.5) 1px, transparent 0); background-size: 30px 30px;"></div>
+            
+            <h2 class="mb-4 text-xl font-bold tracking-tight uppercase sm:text-2xl whitespace-nowrap">
+                Christmas Countdown
+            </h2>
 
-    // If it is currently September 1st
-    if (now.getMonth() === 8 && now.getDate() === 1) {
-        document.getElementById('bersCountdown').innerText = "It's The Bers!\nHappy September!";
-        document.getElementById('bersProgress').style.width = "100%";
-        document.getElementById('bersProgress').textContent = "100%";
-        return;
-    }
+            <div class="flex justify-between mb-1 text-xs font-semibold opacity-90">
+                <span>Dec 26th</span>
+                <span>Dec 25th</span>
+            </div>
 
-    const timeRemaining = targetDate - now;
-    const totalTime = targetDate - startOfCountdown;
-    
-    const days = Math.max(0, Math.ceil(timeRemaining / (1000 * 60 * 60 * 24)));
-    const progressPercentage = Math.min(100, Math.max(0, ((totalTime - timeRemaining) / totalTime) * 100));
+            <div class="h-10 mb-4 progress-container">
+                <div id="xmas-progress" class="h-full transition-all duration-1000 bg-[#c94c4c] flex items-center justify-center text-sm font-bold shadow-inner" style="width: 0%">
+                    0%
+                </div>
+            </div>
 
-    document.getElementById('bersCountdown').innerText = `Days to The Bers\n${days}`;
-    const progressBar = document.getElementById('bersProgress');
-    progressBar.style.width = `${progressPercentage}%`;
-    progressBar.textContent = `${Math.floor(progressPercentage)}%`;
-  }
+            <div class="space-y-1">
+                <p class="text-lg font-medium opacity-90">Sleeps until Christmas!</p>
+                <p id="xmas-days" class="text-4xl font-bold">---</p>
+            </div>
+        </div>
 
-  function updateChristmasCountdown() {
-    const now = new Date();
-    let currentYear = now.getFullYear();
-    
-    // Define the cycle: Dec 26th to Dec 25th
-    let targetDate = new Date(currentYear, 11, 25); // Dec 25th
-    let startOfCycle = new Date(currentYear - 1, 11, 26); // Dec 26th last year
+    </div>
 
-    // If we are past Christmas Day, target next year
-    if (now.getMonth() === 11 && now.getDate() > 25) {
-        targetDate = new Date(currentYear + 1, 11, 25);
-        startOfCycle = new Date(currentYear, 11, 26);
-    }
+    <script>
+        function updateAll() {
+            const now = new Date();
+            
+            // 1. Update Live Clock
+            const options = { weekday: 'short', day: 'j', month: 'M', year: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
+            // Custom format to match screenshot: Sat, 4 Apr 2026 at 23:27:25
+            const datePart = now.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' });
+            const timePart = now.toLocaleTimeString('en-GB', { hour12: false });
+            document.getElementById('live-clock').innerText = `${datePart} at ${timePart}`;
 
-    // Check if it is Christmas Day
-    if (now.getMonth() === 11 && now.getDate() === 25) {
-        document.getElementById('christmasCountdown').innerText = "Merry Christmas!\n0 Sleeps!";
-        document.getElementById('christmasProgress').style.width = "100%";
-        document.getElementById('christmasProgress').textContent = "100%";
-        return;
-    }
+            // 2. The Bers Logic (Sep 1 to Aug 31 cycle)
+            let bersTarget = new Date(now.getFullYear(), 8, 1); // Sep 1
+            if (now >= bersTarget) bersTarget.setFullYear(now.getFullYear() + 1);
+            
+            let bersStart = new Date(bersTarget.getFullYear() - 1, 8, 1);
+            const bersTotal = bersTarget - bersStart;
+            const bersElapsed = now - bersStart;
+            const bersPercent = Math.min(100, Math.max(0, (bersElapsed / bersTotal) * 100));
+            const bersDiff = Math.ceil((bersTarget - now) / (1000 * 60 * 60 * 24));
 
-    const timeRemaining = targetDate - now;
-    const totalTime = targetDate - startOfCycle;
-    
-    // "Sleeps" is typically the number of nights. 
-    // If it's Dec 24th, it's 1 sleep. Math.ceil works perfectly here.
-    const days = Math.max(0, Math.ceil(timeRemaining / (1000 * 60 * 60 * 24)));
-    const progressPercentage = Math.min(100, Math.max(0, ((totalTime - timeRemaining) / totalTime) * 100));
+            document.getElementById('bers-progress').style.width = bersPercent + '%';
+            document.getElementById('bers-progress').innerText = Math.floor(bersPercent) + '%';
+            document.getElementById('bers-days').innerText = bersDiff;
 
-    document.getElementById('christmasCountdown').innerText = `Sleeps until Christmas!\n${days}`;
-    const progressBar = document.getElementById('christmasProgress');
-    progressBar.style.width = `${progressPercentage}%`;
-    progressBar.textContent = `${Math.floor(progressPercentage)}%`;
-  }
+            // 3. Christmas Logic (Dec 26 to Dec 25 cycle)
+            let xmasTarget = new Date(now.getFullYear(), 11, 25); // Dec 25
+            if (now > xmasTarget) xmasTarget.setFullYear(now.getFullYear() + 1);
+            
+            let xmasStart = new Date(xmasTarget.getFullYear() - 1, 11, 26);
+            const xmasTotal = xmasTarget - xmasStart;
+            const xmasElapsed = now - xmasStart;
+            const xmasPercent = Math.min(100, Math.max(0, (xmasElapsed / xmasTotal) * 100));
+            const xmasDiff = Math.ceil((xmasTarget - now) / (1000 * 60 * 60 * 24));
 
-  // Run updates
-  updateBersCountdown();
-  updateChristmasCountdown();
-  setInterval(() => {
-    updateBersCountdown();
-    updateChristmasCountdown();
-  }, 1000);
-</script>
+            document.getElementById('xmas-progress').style.width = xmasPercent + '%';
+            document.getElementById('xmas-progress').innerText = Math.floor(xmasPercent) + '%';
+            document.getElementById('xmas-days').innerText = xmasDiff;
+        }
 
+        // Run once and then every second
+        setInterval(updateAll, 1000);
+        updateAll();
+    </script>
 </body>
 </html>
