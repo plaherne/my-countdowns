@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>The Bers & Christmas Countdowns</title>
+    <title>Paul & Roberta's Countdowns</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap" rel="stylesheet">
     <style>
@@ -35,6 +35,21 @@
             bottom: 0;
             opacity: 0.1;
             pointer-events: none;
+            z-index: 0;
+        }
+        /* Background scattered elements container */
+        .scattered-bg {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 1;
+            user-select: none;
+        }
+        /* Content layer to sit above backgrounds */
+        .content-layer {
+            position: relative;
+            z-index: 10;
         }
     </style>
 </head>
@@ -47,32 +62,49 @@
         </div>
     </div>
 
-    <!-- MAIN CONTAINER - Ensures centering on mobile -->
+    <!-- MAIN CONTAINER -->
     <div class="flex flex-col items-center w-full max-w-sm space-y-6">
 
         <!-- THE BERS WIDGET -->
         <div class="relative w-full overflow-hidden text-white widget-card rounded-3xl bg-gradient-to-br from-[#e67e22] to-[#d35400] p-6 text-center border-4 border-[#f39c12]">
             <div class="pattern-overlay" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 20px 20px;"></div>
             
-            <!-- Optimized Title: Responsive font size -->
-            <h2 class="mb-4 text-xl font-bold tracking-tight uppercase sm:text-2xl whitespace-nowrap">
-                Countdown to the Bers
-            </h2>
-
-            <div class="flex justify-between mb-1 text-xs font-semibold opacity-90">
-                <span>Sep 1st</span>
-                <span>Aug 31st</span>
+            <!-- Scattered Leaves -->
+            <div class="scattered-bg opacity-40">
+                <span class="absolute text-5xl top-2 -left-4 rotate-12">🍁</span>
+                <span class="absolute text-3xl top-16 right-4 -rotate-45">🍂</span>
+                <span class="absolute text-6xl -bottom-4 right-8 rotate-90">🍁</span>
+                <span class="absolute text-4xl bottom-14 -left-2 -rotate-12">🍂</span>
+                <span class="absolute text-3xl top-1/2 left-1/2 rotate-180">🍁</span>
+                <span class="absolute text-2xl top-4 left-1/2 rotate-45">🍂</span>
+                <!-- Additional Leaves added below -->
+                <span class="absolute text-4xl top-1/3 -left-6 rotate-90">🍁</span>
+                <span class="absolute text-2xl bottom-8 left-1/4 -rotate-45">🍂</span>
+                <span class="absolute text-5xl top-1/4 right-1/4 rotate-12">🍁</span>
+                <span class="absolute text-3xl bottom-1/3 -right-2 rotate-180">🍂</span>
+                <span class="absolute text-2xl top-10 left-1/4 -rotate-12">🍁</span>
             </div>
 
-            <div class="h-10 mb-4 progress-container">
-                <div id="bers-progress" class="h-full transition-all duration-1000 bg-black bg-opacity-40 flex items-center justify-center text-sm font-bold" style="width: 0%">
-                    0%
+            <div class="content-layer">
+                <h2 class="mb-4 text-xl font-bold tracking-tight uppercase sm:text-2xl whitespace-nowrap">
+                    Countdown to the Bers
+                </h2>
+
+                <div class="flex justify-between mb-1 text-xs font-semibold opacity-90">
+                    <span>Sep 1st</span>
+                    <span>Aug 31st</span>
                 </div>
-            </div>
 
-            <div class="space-y-1">
-                <p class="text-lg font-medium opacity-90">Days to The Bers</p>
-                <p id="bers-days" class="text-4xl font-bold">---</p>
+                <div class="h-10 mb-4 progress-container bg-black bg-opacity-20">
+                    <div id="bers-progress" class="h-full transition-all duration-1000 bg-black bg-opacity-40 flex items-center justify-center text-sm font-bold" style="width: 0%">
+                        0%
+                    </div>
+                </div>
+
+                <div class="space-y-1">
+                    <p class="text-lg font-medium opacity-90">Days to The Bers</p>
+                    <p id="bers-days" class="text-5xl font-bold">---</p>
+                </div>
             </div>
         </div>
 
@@ -80,24 +112,36 @@
         <div class="relative w-full overflow-hidden text-white widget-card rounded-3xl bg-gradient-to-br from-[#1b4332] to-[#081c15] p-6 text-center border-4 border-[#ffb703]">
             <div class="pattern-overlay" style="background-image: radial-gradient(circle at 2px 2px, rgba(255,255,255,0.5) 1px, transparent 0); background-size: 30px 30px;"></div>
             
-            <h2 class="mb-4 text-xl font-bold tracking-tight uppercase sm:text-2xl whitespace-nowrap">
-                Christmas Countdown
-            </h2>
-
-            <div class="flex justify-between mb-1 text-xs font-semibold opacity-90">
-                <span>Dec 26th</span>
-                <span>Dec 25th</span>
+            <!-- Scattered Christmas Elements -->
+            <div class="scattered-bg opacity-35">
+                <span class="absolute text-4xl top-2 left-2 -rotate-12">🎅</span>
+                <span class="absolute text-5xl top-12 -right-2 rotate-12">⛄</span>
+                <span class="absolute text-4xl bottom-4 right-1/4 -rotate-12">🧝</span>
+                <span class="absolute text-6xl -bottom-6 -left-4 rotate-12">🎅</span>
+                <span class="absolute text-3xl top-1/2 left-1/4 rotate-45">⛄</span>
+                <span class="absolute text-3xl top-4 left-1/2 -rotate-12">🧝</span>
             </div>
 
-            <div class="h-10 mb-4 progress-container">
-                <div id="xmas-progress" class="h-full transition-all duration-1000 bg-[#c94c4c] flex items-center justify-center text-sm font-bold shadow-inner" style="width: 0%">
-                    0%
+            <div class="content-layer">
+                <h2 class="mb-4 text-xl font-bold tracking-tight uppercase sm:text-2xl whitespace-nowrap">
+                    Christmas Countdown
+                </h2>
+
+                <div class="flex justify-between mb-1 text-xs font-semibold opacity-90">
+                    <span>Dec 26th</span>
+                    <span>Dec 25th</span>
                 </div>
-            </div>
 
-            <div class="space-y-1">
-                <p class="text-lg font-medium opacity-90">Sleeps until Christmas!</p>
-                <p id="xmas-days" class="text-4xl font-bold">---</p>
+                <div class="h-10 mb-4 progress-container">
+                    <div id="xmas-progress" class="h-full transition-all duration-1000 bg-[#c94c4c] flex items-center justify-center text-sm font-bold shadow-inner" style="width: 0%">
+                        0%
+                    </div>
+                </div>
+
+                <div class="space-y-1">
+                    <p class="text-lg font-medium opacity-90">Sleeps until Christmas!</p>
+                    <p id="xmas-days" class="text-5xl font-bold">---</p>
+                </div>
             </div>
         </div>
 
@@ -108,8 +152,6 @@
             const now = new Date();
             
             // 1. Update Live Clock
-            const options = { weekday: 'short', day: 'j', month: 'M', year: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
-            // Custom format to match screenshot: Sat, 4 Apr 2026 at 23:27:25
             const datePart = now.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' });
             const timePart = now.toLocaleTimeString('en-GB', { hour12: false });
             document.getElementById('live-clock').innerText = `${datePart} at ${timePart}`;
